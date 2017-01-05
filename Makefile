@@ -28,7 +28,7 @@ LIBUV_LOG := $(TMP)libuv.log
 
 # This is the version of OpenSSL to link against.
 
-OPENSSL_VERSION := 1.0.2f
+OPENSSL_VERSION := 1.0.2j
 
 OPENSSL_ROOT := $(TMP)openssl-$(OPENSSL_VERSION)
 
@@ -84,7 +84,7 @@ $(LIBUV_A): $(call marker,$(TMP)) $(LIBUV_DIR)
 
 $(LIBUV_DIR): $(call marker,$(TMP))
 	@rm -rf $(LIBUV_ROOT)
-	@wget -qO $(TMP)$(LIBUV_SHA).zip http://github.com/libuv/libuv/archive/$(LIBUV_SHA).zip
+	@cp $(LIBUV_SHA).zip $(TMP)$(LIBUV_SHA).zip
 	@unzip -d $(TMP) $(TMP)$(LIBUV_SHA).zip
 	@touch $@
 
@@ -104,7 +104,7 @@ $(firstword $(OPENSSL_A)): $(OPENSSL_DIR)
 
 $(OPENSSL_DIR): $(call marker,$(TMP))
 	@rm -rf $(OPENSSL_ROOT)
-	@wget -qO $(TMP)openssl-$(OPENSSL_VERSION).tar.gz ftp://ftp.openssl.org/source/openssl-$(OPENSSL_VERSION).tar.gz
+	@cp openssl-$(OPENSSL_VERSION).tar.gz $(TMP)openssl-$(OPENSSL_VERSION).tar.gz
 	@tar -C $(TMP) -z -x -v -f $(TMP)openssl-$(OPENSSL_VERSION).tar.gz
 	@touch $@
 
